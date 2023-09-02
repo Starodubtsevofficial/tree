@@ -4,7 +4,7 @@ from sqlite3 import Error
 from bs4 import BeautifulSoup
 def read_sqlite_table():
     try:
-        sqlite_connection = sqlite3.connect('db.sqlite3')
+        sqlite_connection = sqlite3.connect('../db.sqlite3')
         cursor = sqlite_connection.cursor()
         print("Подключен к SQLite для выгрузки строки")
 
@@ -30,8 +30,6 @@ GetSearch = read_sqlite_table()
 print(GetSearch)
 
 
-#
-#
 search =  GetSearch
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
 URL     = "https://www.google.com/search?q=" + search
@@ -46,7 +44,7 @@ print(results_num)
 
 def update_sqlite_table():
     try:
-        sqlite_connection = sqlite3.connect('db.sqlite3')
+        sqlite_connection = sqlite3.connect('../db.sqlite3')
         cursor = sqlite_connection.cursor()
         print("Подключен к SQLite для обновления ссылки")
         data = URL
