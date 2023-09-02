@@ -1,0 +1,264 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru-RU"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="language" content="ru-RU">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="csrf-param" content="_csrf">
+<meta name="csrf-token" content="5xq6i-ScUD9GRTvtAGY-ijbiZLHm11rJ-6pYNfU94lupdOjzsf03egEfS7lIJQfIBoAhyKWHHo2B_CFazWqKBA==">
+    <title>ГЕНЕАЛОГИЧЕСКОЕ ДРЕВО</title>
+    <link href="{% static 'main//css/bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'main/css/jcarousel.responsive.css' %}" rel="stylesheet">
+<link href="{% static 'main/css/bootstrap-datepicker3.css' %}" rel="stylesheet">
+<link href="{% static 'main/css/bootstrap-daterangepicker.css' %}" rel="stylesheet">
+<link href="{% static 'main/css/style.min.css' %}" rel="stylesheet">
+<link href="{% static 'main/css/gsc-tree.css' %}" rel="stylesheet">
+<link href="{% static 'main/css/bootstrap-yii.css' %}" rel="stylesheet">
+<link href="{% static 'main/css/rsl.css' %}" rel="stylesheet">
+<link href="{% static 'main/css/typeahead.js-bootstrap.css' %}" rel="stylesheet">
+    <script src="{% static 'main/js/jquery.js' %}"></script>
+<script src="{% static 'main/js/yii.js' %}"></script>
+<script src="{% static 'main/js/jquery.color-2.1.2.min.js' %}"></script>
+<script src="{% static 'main/js/typeahead.bundle.js' %}"></script>
+
+
+    <script type="text/javascript">
+        var ProjectData = {"pages":{"search":"\/ru\/search","login":"\/ru\/site\/login","logout":"\/ru\/site\/logout","current":"\/ru"},"labels":{"and":"\u0438","clearAllFilters":"\u043e\u0447\u0438\u0441\u0442\u0438\u0442\u044c \u0432\u0441\u0435 \u0444\u0438\u043b\u044c\u0442\u0440\u044b","downloadNotAuthenticated":"\u0412\u0430\u043c \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0432\u043e\u0439\u0442\u0438, \u0447\u0442\u043e\u0431\u044b \u0441\u043a\u0430\u0447\u0430\u0442\u044c \u044d\u0442\u043e\u0442 \u0444\u0430\u0439\u043b.","gak":"\u0413\u0435\u043d\u0435\u0440\u0430\u043b\u044c\u043d\u044b\u0439 \u0430\u043b\u0444\u0430\u0432\u0438\u0442\u043d\u044b\u0439 \u043a\u0430\u0442\u0430\u043b\u043e\u0433","favoritesDocumentAdded":"\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d \u0432 \u0438\u0437\u0431\u0440\u0430\u043d\u043d\u043e\u0435.","favoritesDocumentAddError":"\u041f\u0440\u0438 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u0438 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430 \u0432 \u0438\u0437\u0431\u0440\u0430\u043d\u043d\u043e\u0435 \u0432\u043e\u0437\u043d\u0438\u043a\u043b\u0430 \u043e\u0448\u0438\u0431\u043a\u0430.","favoritesDocumentRemoved":"\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442 \u0443\u0434\u0430\u043b\u0435\u043d \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043d\u043d\u043e\u0433\u043e.","favoritesDocumentRemoveError":"\u041f\u0440\u0438 \u0443\u0434\u0430\u043b\u0435\u043d\u0438\u0438 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430 \u0438\u0437 \u0438\u0437\u0431\u0440\u0430\u043d\u043d\u043e\u0433\u043e \u0432\u043e\u0437\u043d\u0438\u043a\u043b\u0430 \u043e\u0448\u0438\u0431\u043a\u0430.","favoritesNotAuthenticated":"\u0412\u0430\u043c \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0432\u043e\u0439\u0442\u0438, \u0447\u0442\u043e\u0431\u044b \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442 \u0432 \u0438\u0437\u0431\u0440\u0430\u043d\u043d\u043e\u0435.","loading":"\u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0430...","more":"\u0435\u0449\u0451","hide":"\u0441\u043a\u0440\u044b\u0442\u044c","matches":"\u041d\u0430\u0439\u0434\u0435\u043d\u043d\u044b\u0435 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u044f","not":"\u0438 \u043d\u0435","or":"\u0438\u043b\u0438","proposeDocLink":"\u041f\u0440\u043e\u0433\u043e\u043b\u043e\u0441\u043e\u0432\u0430\u0442\u044c \u0437\u0430 \u043e\u0446\u0438\u0444\u0440\u043e\u0432\u043a\u0443","proposeDocCancelLink":"\u041e\u0442\u043c\u0435\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443 \u043e\u0446\u0438\u0444\u0440\u043e\u0432\u043a\u0438","show":"\u043f\u043e\u043a\u0430\u0437\u0430\u0442\u044c","author":"\u0410\u0432\u0442\u043e\u0440","title":"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435","gscTheme":"\u0422\u0435\u043c\u0430","content":"\u0421\u043e\u0434\u0435\u0440\u0436\u0430\u043d\u0438\u0435","eorderDataIsUpdating":"\u0414\u0430\u043d\u043d\u044b\u0435 \u043e\u0431\u043d\u043e\u0432\u043b\u044f\u044e\u0442\u0441\u044f...","eorderConfirmed":"\u042d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u044b\u0439 \u0437\u0430\u043a\u0430\u0437 \u043d\u0430 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442 \u0431\u044b\u043b \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0451\u043d.","eorderExpiredReaderNumber":"\u0412\u0430\u0448 \u0447\u0438\u0442\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0431\u0438\u043b\u0435\u0442 \u0420\u0413\u0411 \u043f\u0440\u043e\u0441\u0440\u043e\u0447\u0435\u043d! \u0427\u0442\u043e\u0431\u044b \u0432\u043e\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c\u0441\u044f \u0443\u0441\u043b\u0443\u0433\u043e\u0439 \u044d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u043e\u0433\u043e \u0437\u0430\u043a\u0430\u0437\u0430, \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c \u0434\u0435\u0439\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0439 \u0447\u0438\u0442\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0431\u0438\u043b\u0435\u0442.","eorderHasntReaderNumber":"\u0427\u0442\u043e\u0431\u044b \u0432\u043e\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c\u0441\u044f \u0443\u0441\u043b\u0443\u0433\u043e\u0439 \u044d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u043e\u0433\u043e \u0437\u0430\u043a\u0430\u0437\u0430, <a href=\"https:\/\/passport.rusneb.ru\">\u043f\u043e\u043b\u0443\u0447\u0438\u0442\u0435 \u0447\u0438\u0442\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0431\u0438\u043b\u0435\u0442 \u0420\u0413\u0411<\/a>.","eorderLoadDataError":"\u041f\u0440\u043e\u0438\u0437\u043e\u0448\u043b\u0430 \u043e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u043f\u043e\u043f\u044b\u0442\u043a\u0435 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0434\u0430\u043d\u043d\u044b\u0435.","eorderNotAuthenticated":"\u0412\u0430\u043c \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0432\u043e\u0439\u0442\u0438, \u0447\u0442\u043e\u0431\u044b \u0441\u043e\u0432\u0435\u0440\u0448\u0438\u0442\u044c \u044d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u043d\u044b\u0439 \u0437\u0430\u043a\u0430\u0437 \u044d\u0442\u043e\u0433\u043e \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430.","fragmentRequestNotAuthenticated":"\u0412\u0430\u043c \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0432\u043e\u0439\u0442\u0438, \u0447\u0442\u043e\u0431\u044b \u0441\u043e\u0432\u0435\u0440\u0448\u0438\u0442\u044c \u0437\u0430\u043a\u0430\u0437 \u0444\u0440\u0430\u0433\u043c\u0435\u043d\u0442\u0430 \u044d\u0442\u043e\u0433\u043e \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430.","fragmentRequestHasntReaderNumber":"\u0427\u0442\u043e\u0431\u044b \u0432\u043e\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c\u0441\u044f \u0443\u0441\u043b\u0443\u0433\u043e\u0439 \u0437\u0430\u043a\u0430\u0437\u0430 \u0444\u0440\u0430\u0433\u043c\u0435\u043d\u0442\u0430, \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u0435 \u0447\u0438\u0442\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0431\u0438\u043b\u0435\u0442 \u0420\u0413\u0411.","fragmentRequestExpiredReaderNumber":"\u0412\u0430\u0448 \u0447\u0438\u0442\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0431\u0438\u043b\u0435\u0442 \u0420\u0413\u0411 \u043f\u0440\u043e\u0441\u0440\u043e\u0447\u0435\u043d! \u0414\u043b\u044f \u0437\u0430\u043a\u0430\u0437\u0430 \u0444\u0440\u0430\u0433\u043c\u0435\u043d\u0442\u0430 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c \u0434\u0435\u0439\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0439 \u0447\u0438\u0442\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0431\u0438\u043b\u0435\u0442.","gscModalDefaultHeader":"\u0412\u044b\u0431\u043e\u0440 \u0442\u0435\u043c\u044b","gscModalSearchHeader":"\u041f\u043e\u0438\u0441\u043a \u043f\u043e \u0442\u0435\u043c\u0430\u043c","gscModalSearchResultsHeader":"\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432"},"flags":{"isAuthenticated":false,"hasReaderNumber":false,"hasActualReaderNumber":false},"urls":{"ajaxParticularRequest":"\/site\/ajax-particular?language=ru","ajaxSuggest":"\/site\/ajax-suggest?language=ru","base":"","gak":"https:\/\/search.rsl.ru\/images","extSpell":"\/site\/ajax-spell?language=ru","highlightPage":"\/image\/highlight-page?language=ru","proposedDocs":"\/site\/get-proposed-docs?language=ru","proposeDocument":"\/site\/propose-document?language=ru","proposeDocumentCancel":"\/site\/propose-document?cancel=1&language=ru","record":"\/ru\/record","search":"\/ru\/search","searchGakSeparator":"https:\/\/search.rsl.ru\/images\/main\/search","searchGscThemes":"\/site\/search-gsc-themes?language=ru","addBookmark":"\/ru\/api\/favorite?action=add-bookmark","removeBookmark":"\/ru\/api\/favorite?action=remove-bookmark","getBookmarks":"\/ru\/api\/favorite?action=get-bookmarks","eorderConfirmOrder":"\/eorder-aleph\/confirm-order?language=ru","eorderGetOrder":"\/eorder-aleph\/get-order?language=ru","eorderRequestDetails":"\/eorder-aleph\/request-order-details?language=ru","fragmentRequest":"\/site\/request-fragment?language=ru","filter":"\/site\/ajax-index?language=ru"},"params":{"filterClass":"SearchFilterForm"},"depositedDocsCatalog":"rsl03","fields":{"elfunds":{"type":"checkbox","id":"el-funds","hashname":"ef","defaultValue":0,"badge":true},"nofile":{"type":"checkbox","id":"nofile","hashname":"nf","defaultValue":0,"badge":true},"accessFree":{"type":"checkbox","id":"access-free","hashname":"af","defaultValue":0,"badge":true},"accessLimited":{"type":"checkbox","id":"access-limited","hashname":"al","defaultValue":0,"badge":true},"pubyearfrom":{"type":"text","id":"pubyear-from","hashname":"yf","defaultValue":"","label":"\u0418\u0437\u0434\u0430\u043d\u044b \u0441","badge":true},"pubyearto":{"type":"text","id":"pubyear-to","hashname":"yt","defaultValue":"","label":"\u0418\u0437\u0434\u0430\u043d\u044b \u043f\u043e","badge":true},"digitizedDateFrom":{"type":"text","id":"digitizedDateFrom","hashname":"digitizedf","defaultValue":"","label":"\u041f\u043e\u0441\u0442\u0443\u043f\u0438\u043b\u0438 \u0441","badge":true,"plugin":"datepicker"},"digitizedDateTo":{"type":"text","id":"digitizedDateTo","hashname":"digitizedt","defaultValue":"","label":"\u041f\u043e\u0441\u0442\u0443\u043f\u0438\u043b\u0438 \u043f\u043e","badge":true,"plugin":"datepicker"},"coldatefrom":{"type":"text","id":"coldatefrom","hashname":"colf","defaultValue":"","label":"\u041f\u043e\u0441\u0442\u0443\u043f\u0438\u043b\u0438 \u0432 \u0415\u042d\u041a \u0420\u0413\u0411 \u0441","badge":true,"plugin":"datepicker"},"coldateto":{"type":"text","id":"coldateto","hashname":"colt","defaultValue":"","label":"\u041f\u043e\u0441\u0442\u0443\u043f\u0438\u043b\u0438 \u0432 \u0415\u042d\u041a \u0420\u0413\u0411 \u043f\u043e","badge":true,"plugin":"datepicker"},"sortby":{"type":"dropdown","id":"sortby","hashname":"s","defaultValue":"coldatedesc","label":"\u0421\u043e\u0440\u0442\u0438\u0440\u043e\u0432\u043a\u0430","badge":true},"vakcodes":{"type":"checkboxlist","class":"vakcode-checkbox","hashname":"vc","defaultValue":false,"label":"\u0421\u043f\u0435\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u044c","badge":true},"gscThemes":{"type":"checkboxlist","class":"gsc-checkbox","hashname":"t","defaultValue":false,"label":"\u0422\u0435\u043c\u0430","badge":true,"encode":true},"page":{"type":"text","id":"page","hashname":"p","defaultValue":1},"digitalAvail":{"type":"checkboxlist","class":"digitalAvail-checkbox","hashname":"digitalAvail","defaultValue":false,"ignoreAllChecked":true,"label":"\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b","badge":true},"cols":{"type":"checkboxlist","class":"col-checkbox","hashname":"col","defaultValue":false,"ignoreAllChecked":true,"label":"\u041a\u0430\u0442\u0430\u043b\u043e\u0433","badge":true},"languages":{"type":"checkboxlist","class":"language-checkbox","hashname":"l","defaultValue":false,"label":"\u042f\u0437\u044b\u043a","badge":true}},"fieldIds":{"eorderForm":{"email":"eorderrequestform-email","firstName":"eorderrequestform-firstname","middleName":"eorderrequestform-middlename","lastName":"eorderrequestform-lastname","readerNumber":"eorderrequestform-readernumber","readingRoomNumber":"eorderrequestform-readingroomnumber","ticketBarcode":"eorderrequestform-ticketbarcode","isIpLocal":"eorderrequestform-isiplocal","documentId":"eorderrequestform-documentid","docStorageId":"eorderrequestform-docstorageid","documentLink":"eorderrequestform-documentlink","location":"eorderrequestform-location","author":"eorderrequestform-author","title":"eorderrequestform-title","imprint":"eorderrequestform-imprint","pubyear":"eorderrequestform-pubyear","volume":"eorderrequestform-volume","series":"eorderrequestform-series","comment":"eorderrequestform-comment","eorderDatetime":"eorderrequestform-eorderdatetime","documentBarcode":"eorderrequestform-documentbarcode","source":"eorderrequestform-source","specialFund":"eorderrequestform-specialfund","hasCommonFund":"eorderrequestform-hascommonfund","utilityFund":"eorderrequestform-utilityfund","issueInformation":"eorderrequestform-issueinformation","hasFile":"eorderrequestform-hasfile","readingRoom":"eorderrequestform-readingroom","readingRoomTitle":"eorderrequestform-readingroomtitle","gakCardUrl":"eorderrequestform-gakcardurl"}},"system":{"PaginationUrlPrefix":"\/ru","infiniteScrollMaxPage":100}};
+        if (!ProjectData.system) {
+            ProjectData.system = {};
+        }
+    </script>
+</head>
+<body>
+
+<div id="wrapper">
+
+    <div class="header" id="header" style="transform: none;">
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 logo-row rsl-logo-column">
+                    <div class="logo" id="logoBlock">
+                        <a id="logoLink" href="#">
+                            <img id="logoImage" src="{% static 'main/img/logo_main.png' %}">
+                        </a>
+                        <div class="hidden-xs hidden-sm" id="logoText">
+                            <a href="#" title="Перейти на главную страницу"><img src="{% static 'main/img/header-main.png' %}" alt=""></a>                        </div>
+                    </div>
+                    <div class="lang text-center">
+                                                    <a class="lang-ico lang-ru-active" href="#"></a>
+                            <a class="lang-ico lang-en" href="#"></a>
+                                            </div>
+                </div>
+                <div class="col-lg-8 col-md-7 col-sm-9 col-xs-8 rsl-nav-column">
+
+                        <div class="rsl-search-form">
+					<!-- search form -->
+
+
+<form class="text-left filters" method="post" role="form">
+
+	     {% csrf_token %}
+     {{ form.GetSearch }}
+    <div class="col-xs-2 hidden-xs hidden-sm zero-paddings">
+
+        <button type="submit" id="search-btn" class="btn rsl-btn search-btn">Поиск</button>
+    </div>
+</div>
+
+</form>           </div>
+<!-- search form -->
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+
+
+
+    <div class="col-md-8 col-xs-12 col-main">
+        <!--div class="row js-container">
+            <div class="col-xs-11 rsl-descr">
+                <ul class="list-inline rsl-filter-list js-filter-list"><li class="rsl-filter-badge">По дате поступл-я в ЕЭК РГБ (по убыв.)&nbsp;<a class="js-filter-exclude" data-name="sortby" href="#">
+				<span class="glyphicon glyphicon-remove"></span></a>
+				</li><li class="rsl-filter-badge">Поступили в ЕЭК РГБ с 10.07.2023&nbsp;<a class="js-filter-exclude" data-name="coldatefrom" href="#">
+				<span class="glyphicon glyphicon-remove"></span></a></li><li><a href="#" class="rsl-filter" id="filter-clear-link">очистить все фильтры</a></li></ul>
+            </div>
+        </div-->
+        <div id="content-wrapper">
+            <div id="content-replace-loader" class="rsl-replace-loader" style="display: none;"><img src="{% static 'main/img/loading.gif' %}"></div>
+            <div id="content-box" style="opacity: 1;">
+
+
+
+<div class="rsl-search-info e-filter-page">
+    <a href="#" id="external-sources-link" class="rsl-link pull-right rsl-extsource-link hidden">Внешние ресурсы: <span id="ext-src-count">0</span></a>
+    <b>Результатов:
+        {% for el in SearchResultGoogleNumbers %}
+                       {{ el.SearchResultGoogleNumbers }}
+        {% endfor %}
+    </b>({% for em in SearchResultGoogleSearchTime %}
+                        {{ em.SearchResultGoogleSearchTime }}
+        {% endfor %}
+        сек. )
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#resultModal, #eorderModal, #documentFragmentRequestModal, #eorderPlanfixModal, #newEorderModal').on('hidden.bs.modal', function () {
+            $(this).find('.modal-header h4').text("Загрузка...");
+            $(this).find('.modal-body').text("Загрузка...");
+            $(this).find('.modal-footer').text('');
+            $(this).removeData('bs.modal');
+        });
+    });
+</script>
+
+<div id="content-items">
+    <div id="result-page-1" class="result-item" data-page="1">
+
+
+<div id="page-separator-1" class="row page-separator hidden">
+    <div class="col-xs-4 col-sm-5"><hr></div>
+    <div class="col-xs-4 col-sm-2 text-center page-separator-col"><span class="page-separator-label">страница 1</span></div>
+    <div class="col-xs-4 col-sm-5"><hr></div>
+</div>
+
+        {% if 1 == 1 %}
+                            {% for el in SearchResultGoogleLinks %}
+<div class="row search-container pt10" data-id="01011918563">
+
+    <div class="hidden-xs col-sm-1 rsl-position-col">
+        <div class="text-center">
+                        <h4 class="search-item-position"></h4>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-11 rsl-search-item-col">
+        <div class="search-item p10">
+
+
+            <div class="rsl-search-itemdescr-col">
+
+                <div>
+                         <span class="search-descr">
+                        <span class="js-item-maininfo" >
+
+                       {{ el.SearchResultGoogleLinks }}
+
+
+                        </span>
+                                                &nbsp;
+                         </span>
+                               </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="rsl-item-action-links row">
+                <div class="col-sm-6 rsl-item-action-read-panel">
+
+                                    </div>
+                <div class="col-sm-6 rsl-item-action-order-panel">
+
+
+                                            <div class="rsl-eorder-dropdown-menu js-eorder-dropdown-menu" data-id="01011918563">
+                            <a class="rsl-eorder-dropdown-btn" href="{{ el.SearchResultGoogleLinks }}">Перейти</a>                            <div class="rsl-eorder-dropdown-content">
+                             </div>
+                        </div>
+                                    </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+        </div>
+    </div>
+
+</div>
+                        {% endfor %}
+        {% else %}
+                        <p>Ответ не соответствует поисковому запросу</p>
+        {% endif %}
+
+
+</div>
+</div>
+
+<!--div class="row">
+    <div class="col-xs-12 col-sm-8">
+        <div id="infinite-pagination" class="zero-paddings bottom-pagination text-center" style="bottom: 50px;">
+            <div class="text-center"><ul class="pagination"><li class="disabled"><a class="pagination-link" href="#" data-page="1">«</a></li><li class="active"><a class="pagination-link" href="#" data-page="1">1</a></li><li><a class="pagination-link" href="#" data-page="2">2</a></li><li><a class="pagination-link" href="#" data-page="3">3</a></li><li><a class="pagination-link" href="#" data-page="100">»</a></li></ul></div>        </div>
+    </div>
+</div-->
+</div>
+            <div id="content-page-loader" class="rsl-page-loader" style="display: none;"><img src="{% static 'main/img/loading.gif' %}"></div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+<footer class="footer" id="footer" style="transform: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-5 col-sm-6 col-md-5 text-left">
+                <div class="copyright">
+                    <small>© 2023<span class="hidden-xs"> Геналогическое древо</span><span class="hidden-sm hidden-md hidden-lg"> </span></small>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-3 col-md-4 col-lg-5 text-left">
+            </div>
+            <div class="col-xs-3 col-lg-2 text-left">
+                <!--div class="developer">
+                    <a class="dev-icon" href="#"></a>
+					<div class="dev-name hidden-xs hidden-sm">разработано в<br></div>
+                    <div class="clearfix"></div>
+                </div-->
+            </div>
+        </div>
+    </div>
+</footer><!-- footer -->
+
+<script src="{% static 'main/js/bootstrap.js' %}"></script>
+<script src="{% static 'main/js/general.js' %}"></script>
+<script src="{% static 'main/js/states.js' %}"></script>
+<script src="{% static 'main/js/request.js' %}"></script>
+<script src="{% static 'main/js/eorder-stuff.js' %}"></script>
+<script src="{% static 'main/js/jquery.jcarousel.js' %}"></script>
+<script src="{% static 'main/js/jcarousel.responsive.js' %}"></script>
+<script src="{% static 'main/js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'main/js/bootstrap-datepicker.ru.min.js' %}"></script>
+<script src="{% static 'main/js/jstree.min.js' %}"></script>
+<script src="{% static 'main/js/gsc-tree.js' %}"></script>
+<script src="{% static 'main/js/layout-main.js' %}"></script>
+<script>jQuery(function ($) {
+if (!window.location.hash) { window.location.hash = "colf=10.07.2023&s=coldatedesc"; }
+;jQuery('#coldatefrom').datepicker({"todayHighlight":true,"autoclose":true,"language":"ru"});
+;jQuery('#coldateto').datepicker({"todayHighlight":true,"autoclose":true,"language":"ru"});
+;jQuery('#digitizedDateFrom').datepicker({"todayHighlight":true,"autoclose":true,"language":"ru"});
+;jQuery('#digitizedDateTo').datepicker({"todayHighlight":true,"autoclose":true,"language":"ru"});
+jQuery('#gscModal').modal({"show":false});
+jQuery('#vakModal').modal({"show":false});
+jQuery('#langModal').modal({"show":false});
+jQuery('#adv-search-tabs').tab();
+jQuery('#adv-search-modal').modal({"show":false});
+jQuery(document).trigger("afterReady");
+});</script>
+
+</body></html>
