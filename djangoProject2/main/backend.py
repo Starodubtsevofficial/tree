@@ -7,11 +7,9 @@ def read_sqlite_table():
         sqlite_connection = sqlite3.connect('../db.sqlite3')
         cursor = sqlite_connection.cursor()
         print("Подключен к SQLite для выгрузки строки")
-
         sqlite_select_query = "SELECT id, GetSearch, SearchNumber from main_search ms  where id = (select max(id) from main_search)"
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
-        print("Вывод каждой строки")
         for row in records:
             print("id:", row[0]),
             print("GetSearch:", row[1]),
@@ -48,7 +46,6 @@ def update_sqlite_table():
         cursor = sqlite_connection.cursor()
         print("Подключен к SQLite для обновления ссылки")
         data = URL
-        print(URL)
         sql_update_query = "UPDATE main_searchresultgooglelink SET SearchResultGoogleLinks=? WHERE id=?;"
         cursor.execute(sql_update_query, (data, 1))
         sqlite_connection.commit()
@@ -62,4 +59,25 @@ def update_sqlite_table():
             sqlite_connection.close()
             print("Соединение с SQLite закрыто")
 update_sqlite_table()
+
+
+def update_sqlite_table_result():
+    try:
+        sqlite_connection = sqlite3.connect('../db.sqlite3')
+        cursor = sqlite_connection.cursor()
+        print("Подключен к SQLite для обновления количества запросов")
+        data = results_num
+        sql_update_query = "UPDATE main_searchresultgooglenumber SET SearchResultGoogleNumbers=?, SearchResultGoogleSearchTime=? WHERE id=1;"
+        cursor.execute(sql_update_query, (data, 1))
+        sqlite_connection.commit()
+        print("Запись успешно обновлена в таблице main_searchresultgooglenumber ", cursor.rowcount)
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Ошибка при работе с SQLite", error)
+    finally:
+        if sqlite_connection:
+            sqlite_connection.close()
+            print("Соединение с SQLite закрыто")
+update_sqlite_table_result()
 
