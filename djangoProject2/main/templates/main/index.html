@@ -61,7 +61,7 @@
 <form class="text-left filters" method="post" role="form">
 
 	     {% csrf_token %}
-     {{ form }}
+     {{ form.GetSearch }}
     <div class="col-xs-2 hidden-xs hidden-sm zero-paddings">
 
         <button type="submit" id="search-btn" class="btn rsl-btn search-btn">Поиск</button>
@@ -131,8 +131,10 @@
     <div class="col-xs-4 col-sm-2 text-center page-separator-col"><span class="page-separator-label">страница 1</span></div>
     <div class="col-xs-4 col-sm-5"><hr></div>
 </div>
+    {% if 1 == 1 %}
 
-        {% if 1 == 1 %}
+        <!-- if SearchSort.SearchNumber  == SearchSort2.SearchResultGoogleLinksNumberResponse -->
+
                             {% for el in SearchResultGoogleLinks %}
 <div class="row search-container pt10" data-id="01011918563">
 
@@ -171,8 +173,8 @@
                 <div class="col-sm-6 rsl-item-action-order-panel">
 
 
-                                            <div class="rsl-eorder-dropdown-menu js-eorder-dropdown-menu" data-id="01011918563">
-                            <a class="rsl-eorder-dropdown-btn" href="{{ el.SearchResultGoogleLinks }}">Перейти</a>                            <div class="rsl-eorder-dropdown-content">
+                                            <div class=" js-eorder-dropdown-menu" data-id="01011918563">
+                            <a class="rsl-eorder-dropdown-btn" target="_blank" href="{{ el.SearchResultGoogleLinks }}">Перейти</a>                            <div class="rsl-eorder-dropdown-content">
                              </div>
                         </div>
                                     </div>

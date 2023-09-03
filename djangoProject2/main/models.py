@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Search(models.Model):
-    SearchNumber = models.TextField('Номер поиска',)
+    SearchNumber = models.TextField('Номер поиска', default=1, blank=True, null=True)
     GetSearch = models.CharField('Поисковой запрос', max_length=100)
 
 
