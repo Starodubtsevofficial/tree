@@ -5,7 +5,7 @@ from django.forms import ModelForm, TextInput
 class SearchForm(ModelForm):
     class Meta:
         model = Search
-        fields = ['GetSearch','SearchNumber']
+        fields = ['GetSearch']
 
         widgets = {
             "GetSearch": TextInput(attrs={

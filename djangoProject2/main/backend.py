@@ -11,9 +11,9 @@ def read_sqlite_table():
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
         for row in records:
-            print("id:", row[0]),
-            print("GetSearch:", row[1]),
-            print("SearchNumber:", row[2], end="\n\n")
+            row[0],
+            row[1],
+            row[2]
 
         cursor.close()
     except sqlite3.Error as error:
@@ -25,20 +25,20 @@ def read_sqlite_table():
     return row[1]
 read_sqlite_table()
 GetSearch = read_sqlite_table()
-print(GetSearch)
+print("Запрос:", GetSearch)
 
 
 search =  GetSearch
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"}
 URL     = "https://www.google.com/search?q=" + search
-print(URL)
+print("Ссылка:", URL)
 result = requests.get(URL, headers=headers)
 
 soup = BeautifulSoup(result.content, 'html.parser')
 
 total_results_text = soup.find("div", {"id": "result-stats"}).find(string=True, recursive=False)
 results_num = ''.join([num for num in total_results_text if num.isdigit()])
-print(results_num)
+print("Количество запросов:", results_num)
 
 def update_sqlite_table():
     try:
