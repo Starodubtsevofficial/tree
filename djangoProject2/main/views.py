@@ -28,11 +28,27 @@ def index(request):
             URL_Bing   = "https://www.bing.com/search?q=" + str(search)
             result_google = requests.get(URL_Google, headers=headers)
             response_google = requests.post(URL_Google)
+            result_yandex = requests.get(URL_Yandex, headers=headers)
+            response_yandex = requests.post(URL_Yandex)
+            result_yahoo = requests.get(URL_Yahoo, headers=headers)
+            response_yahoo = requests.post(URL_Yahoo)
+            result_bing = requests.get(URL_Bing, headers=headers)
+            response_bing = requests.post(URL_Bing)
             ###print(soup.prettify())
             soup = BeautifulSoup(result_google.content, 'html.parser')
             total_results_text = soup.find("div", {"id": "result-stats"}).find(string=True, recursive=False)
-            results_num = ''.join([num for num in total_results_text if num.isdigit()])
+            results_num_google = int("".join([num for num in total_results_text if num.isdigit()]))
 
+            soup = BeautifulSoup(result_yahoo.content, 'html.parser')
+            total_results_text = soup.find("span", {"class": "fz-14 lh-22"}).find(string=True, recursive=False)
+            results_num_yahoo = int("".join([num for num in total_results_text if num.isdigit()]))
+
+            soup = BeautifulSoup(result_bing.content, 'html.parser')
+            total_results_text = soup.find("span", {"class": "sb_count"}).find(string=True, recursive=False)
+            results_num_bing = int("".join([num for num in total_results_text if num.isdigit()]))
+
+            results_num_total = str(results_num_google + results_num_yahoo + results_num_bing)
+            results_response_total = (response_google.elapsed.total_seconds() + response_yahoo.elapsed.total_seconds() + response_bing.elapsed.total_seconds() + response_yandex.elapsed.total_seconds())
 
             SearchResultGoogleNumber.objects.all().delete()
             SearchResultGoogleLink.objects.all().delete()
@@ -58,8 +74,8 @@ def index(request):
                 SearchResultGoogleLinksNumberResponse = 4
             )
             SearchResultGoogleNumber.objects.create(
-                SearchResultGoogleNumbers = results_num,
-                SearchResultGoogleSearchTime = response_google.elapsed.total_seconds()
+                SearchResultGoogleNumbers = results_num_total,
+                SearchResultGoogleSearchTime = results_response_total
             )
 
 
