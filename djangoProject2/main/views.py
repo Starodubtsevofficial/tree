@@ -48,7 +48,7 @@ def index(request):
             except:
                    results_num_bing = int(0)
 
-            results_num_total = str(results_num_bing)
+            results_num_total = str(results_num_google + results_num_yahoo + results_num_bing)
             results_response_total = str(response_google.elapsed.total_seconds() + response_yahoo.elapsed.total_seconds() + response_yandex.elapsed.total_seconds())
 
             SearchResultGoogleNumber.objects.all().delete()
