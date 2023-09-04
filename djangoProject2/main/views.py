@@ -4,8 +4,7 @@ from .models import SearchResultGoogleNumber
 from .models import SearchResultGoogleLink
 from .models import Search
 import requests
-import sqlite3
-from sqlite3 import Error
+
 from bs4 import BeautifulSoup
 from .forms import SearchForm
 
@@ -36,19 +35,21 @@ def index(request):
             response_bing = requests.post(URL_Bing)
             ###print(soup.prettify())
             soup = BeautifulSoup(result_google.content, 'html.parser')
-            total_results_text = soup.find("div", {"id": "result-stats"}).find(string=True, recursive=False)
-            results_num_google = int("".join([num for num in total_results_text if num.isdigit()]))
+            total_results_text_google = soup.find("div", {"id": "result-stats"}).find(string=True, recursive=False)
+            results_num_google = int("".join([num for num in total_results_text_google if num.isdigit()]))
 
             soup = BeautifulSoup(result_yahoo.content, 'html.parser')
-            total_results_text = soup.find("span", {"class": "fz-14 lh-22"}).find(string=True, recursive=False)
-            results_num_yahoo = int("".join([num for num in total_results_text if num.isdigit()]))
-
-            soup = BeautifulSoup(result_bing.content, 'html.parser')
-            total_results_text = soup.find("span", {"class": "sb_count"}).find(string=True, recursive=False)
-            results_num_bing = int("".join([num for num in total_results_text if num.isdigit()]))
+            total_results_text_yahoo = soup.find("span", {"class": "fz-14 lh-22"}).find(string=True, recursive=False)
+            results_num_yahoo = int("".join([num for num in total_results_text_yahoo if num.isdigit()]))
+        try:
+             soup = BeautifulSoup(result_bing.content, 'html.parser')
+             total_results_text_bing = soup.find("span", {"class": "sb_count"}).find(string=True, recursive=False)
+             results_num_bing = int("".join([num for num in total_results_text_bing if num.isdigit()]))
+        except:
+            results_num_bing = int(0)
 
             results_num_total = str(results_num_google + results_num_yahoo + results_num_bing)
-            results_response_total = (response_google.elapsed.total_seconds() + response_yahoo.elapsed.total_seconds() + response_bing.elapsed.total_seconds() + response_yandex.elapsed.total_seconds())
+            results_response_total = str(response_google.elapsed.total_seconds() + response_yahoo.elapsed.total_seconds() + response_yandex.elapsed.total_seconds())
 
             SearchResultGoogleNumber.objects.all().delete()
             SearchResultGoogleLink.objects.all().delete()
