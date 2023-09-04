@@ -41,14 +41,14 @@ def index(request):
             soup = BeautifulSoup(result_yahoo.content, 'html.parser')
             total_results_text_yahoo = soup.find("span", {"class": "fz-14 lh-22"}).find(string=True, recursive=False)
             results_num_yahoo = int("".join([num for num in total_results_text_yahoo if num.isdigit()]))
-        try:
-             soup = BeautifulSoup(result_bing.content, 'html.parser')
-             total_results_text_bing = soup.find("span", {"class": "sb_count"}).find(string=True, recursive=False)
-             results_num_bing = int("".join([num for num in total_results_text_bing if num.isdigit()]))
-        except:
-            results_num_bing = int(0)
+            try:
+                   soup = BeautifulSoup(result_bing.content, 'html.parser')
+                   total_results_text_bing = soup.find("span", {"class": "sb_count"}).find(string=True, recursive=False)
+                   results_num_bing = int("".join([num for num in total_results_text_bing if num.isdigit()]))
+            except:
+                   results_num_bing = int(0)
 
-            results_num_total = str(results_num_google + results_num_yahoo + results_num_bing)
+            results_num_total = str(results_num_bing)
             results_response_total = str(response_google.elapsed.total_seconds() + response_yahoo.elapsed.total_seconds() + response_yandex.elapsed.total_seconds())
 
             SearchResultGoogleNumber.objects.all().delete()
